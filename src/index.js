@@ -1,121 +1,216 @@
-var east = [];
-var north = [];
+var canvas = document.getElementById("myCanvas");
+var context = canvas.getContext("2d");
 
-function startGame() {
-  myGameArea.start();
-}
+context.fillStyle = "#8080FF";
+context.lineWidth = 3;
+var collisions = 0;
+var score = 0;
 
-var myGameArea = {
-  canvas: document.createElement("canvas"),
-  start: function () {
-    this.canvas.width = 1000;
-    this.canvas.height = 600;
-    this.context = this.canvas.getContext("2d");
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-    this.frameNo = 0;
-    this.interval = setInterval(updateGameArea, 20);
-  },
-  stop: function () {
-    clearInterval(this.interval);
-  },
-  clear: function () {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  },
+var plane0 = {
+  x: Math.floor(Math.random() * (1000 + 1)),
+  y: 20,
+  height: 15,
+  width: 15,
+  dx: 1,
+  dy: 1,
+  angle: 1.22173,
+  id: "1",
+  status: true,
+  selected: false,
+};
+var plane1 = {
+  x: 980,
+  y: Math.floor(Math.random() * (600 + 1)),
+  height: 15,
+  width: 15,
+  dx: -1,
+  dy: -1,
+  angle: 1.5708,
+  id: "2",
+  status: true,
+  selected: false,
+};
+var plane2 = {
+  x: Math.floor(Math.random() * (1000 + 1)),
+  y: 20,
+  height: 15,
+  width: 15,
+  dx: 1.25,
+  dy: 1.25,
+  angle: 0.785398,
+  id: "3",
+  status: true,
+  selected: false,
+};
+var plane3 = {
+  x: 980,
+  y: Math.floor(Math.random() * (600 + 1)),
+  height: 15,
+  width: 15,
+  dx: -1.25,
+  dy: -1.25,
+  angle: 1.5708,
+  id: "4",
+  status: true,
+  selected: false,
+};
+var plane4 = {
+  x: 980,
+  y: Math.floor(Math.random() * (600 + 1)),
+  height: 15,
+  width: 15,
+  dx: -1.75,
+  dy: -1.75,
+  angle: 1.5708,
+  id: "5",
+  status: true,
+  selected: false,
+};
+var plane5 = {
+  x: Math.floor(Math.random() * (1000 + 1)),
+  y: 580,
+  height: 15,
+  width: 15,
+  dx: -1.75,
+  dy: -1.75,
+  angle: 1.0472,
+  id: "6",
+  status: true,
+  selected: false,
+};
+var plane6 = {
+  x: 20,
+  y: Math.floor(Math.random() * (600 + 1)),
+  height: 15,
+  width: 15,
+  dx: 1.5,
+  dy: 1.5,
+  angle: 1.5708,
+  id: "7",
+  status: true,
+  selected: false,
 };
 
-function everyinterval(n) {
-  if ((myGameArea.frameNo / n) % 1 == 0) {
-    return true;
-  }
-  return false;
-}
+var plane7 = {
+  x: 20,
+  y: Math.floor(Math.random() * (600 + 1)),
+  height: 15,
+  width: 15,
+  dx: 0.5,
+  dy: 0.5,
+  angle: 1.5708,
+  id: "8",
+  status: true,
+  selected: false,
+};
 
-function component(width, height, color, x, y, id, type) {
-  this.id = id;
-  this.type = type;
-  this.width = width;
-  this.height = height;
-  this.speed = 1;
-  this.angle = 0;
-  this.x = x;
-  this.y = y;
-  this.update = function () {
-    ctx = myGameArea.context;
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.angle);
-    ctx.fillStyle = color;
-    ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
-    ctx.restore();
-  };
-  this.newPos = function () {
-    this.x += this.speed * Math.sin(this.angle);
-    this.y -= this.speed * Math.cos(this.angle);
-  };
-  this.crashWith = function (otherobj) {
-    var myleft = this.x;
-    var myright = this.x + this.width;
-    var mytop = this.y;
-    var mybottom = this.y + this.height;
-    var otherleft = otherobj.x;
-    var otherright = otherobj.x + otherobj.width;
-    var othertop = otherobj.y;
-    var otherbottom = otherobj.y + otherobj.height;
-    var crash = true;
-    if (
-      mybottom < othertop ||
-      mytop > otherbottom ||
-      myright < otherleft ||
-      myleft > otherright
-    ) {
-      crash = false;
+var planes = [];
+
+planes.push(plane0, plane1, plane2, plane3, plane4, plane5, plane6, plane7);
+
+function draw() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  for (var i = 0; i < planes.length; i++) {
+    var p = planes[i];
+    if (p.status === true) {
+      context.beginPath();
+      context.rect(p.x, p.y, p.height, p.width, p.dx, p.dy);
+      context.font = "16px Arial";
+      context.fillText(p.id, p.x + p.width / 4, p.y - 2);
+      context.closePath();
+      context.fill();
     }
-    return crash;
-  };
+  }
 }
 
-function updateGameArea() {
-  var x, y;
-  for (i = 0; i < north.length; i += 1) {
-    for (i = 0; i < east.length; i += 1) {
-      if (east[i].crashWith(north[i])) {
-        console.log("Collision!");
+function drawScore() {
+  context.font = "16px Arial";
+  context.fillText("Collisions: " + collisions, 8, 20);
+  context.fillText("Score: " + score, 8, 40);
+}
+
+function remove1() {
+  planes[0].selected = true;
+}
+function remove2() {
+  planes[1].selected = true;
+}
+function remove3() {
+  planes[2].selected = true;
+}
+function remove4() {
+  planes[3].selected = true;
+}
+function remove5() {
+  planes[4].selected = true;
+}
+function remove6() {
+  planes[5].selected = true;
+}
+function remove7() {
+  planes[6].selected = true;
+}
+function remove8() {
+  planes[7].selected = true;
+}
+
+function collisionDetection() {
+  var planesCopy = [...planes];
+  for (var i = 0; i < planes.length; i++) {
+    for (var j = 0; j < planesCopy.length; j++) {
+      var p = planes[i];
+      var c = planesCopy[j];
+      if (p.status === true && c.status === true) {
+        if (p !== c) {
+          if (
+            p.x < c.x + c.width &&
+            p.x + p.width > c.x &&
+            p.y < c.y + c.height &&
+            p.y + p.height > c.y
+          ) {
+            if (p.selected === false && c.selected === false) {
+              p.status = false;
+              c.status = false;
+              collisions++;
+            }
+            if (c.selected === true || p.selected === true) {
+              p.x += 200;
+              score++;
+              c.selected = false;
+              p.selected = false;
+            }
+          }
+        }
       }
     }
   }
-  myGameArea.clear();
-  myGameArea.frameNo += 1;
-  if (myGameArea.frameNo == 1 || everyinterval(300)) {
-    y = Math.floor(Math.random() * (600 + 1));
-    east.push(new component(15, 15, "green", 1020, y, "right"));
-  }
-  if (myGameArea.frameNo == 1 || everyinterval(300)) {
-    y = Math.floor(Math.random() * (600 + 1));
-    east.push(new component(15, 15, "yellow", -20, y, "left"));
-  }
-  if (myGameArea.frameNo == 1 || everyinterval(300)) {
-    x = Math.floor(Math.random() * (1000 + 1));
-    north.push(new component(15, 15, "red", x, 620, "bottom"));
-  }
-  if (myGameArea.frameNo == 1 || everyinterval(300)) {
-    x = Math.floor(Math.random() * (1000 + 1));
-    north.push(new component(15, 15, "blue", x, -20, "top"));
-  }
-  for (i = 0; i < east.length; i += 1) {
-    if (east[i].id === "right") {
-      east[i].x += -1;
-    } else {
-      east[i].x += 1;
-    }
-    east[i].update();
-  }
+}
 
-  for (i = 0; i < north.length; i += 1) {
-    if (north[i].id === "bottom") {
-      north[i].y += -1;
-    } else {
-      north[i].y += 1;
+var frameCount = 0;
+
+function animate() {
+  if (frameCount < 5000) {
+    requestAnimationFrame(animate);
+    frameCount++;
+  }
+  for (var i = 0; i < planes.length; i++) {
+    var p = planes[i];
+    p.x += p.dx * Math.sin(p.angle);
+    p.y += p.dy * Math.cos(p.angle);
+  }
+  draw();
+  collisionDetection();
+  drawScore();
+  for (var i = 0; i < planes.length; i++) {
+    var p = planes[i];
+    if (p.x + p.dx > canvas.width || p.x + p.dx < p.width) {
+      p.dx = -p.dx;
+      p.selected = false;
     }
-    north[i].update();
+    if (p.y + p.dy > canvas.height || p.y + p.dy < p.height) {
+      p.dy = -p.dy;
+      p.selected = false;
+    }
   }
 }
+requestAnimationFrame(animate);
