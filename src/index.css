@@ -3,29 +3,22 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 canvas {
-  background-color: black;
+  background-color: white;
   margin-bottom: 16px;
 }
-
-div {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
+.toggle {
+  display: none;
 }
 
-button {
-  padding: 5px 10px;
-  border-radius: 10px;
-  border: 3px solid gray;
-  font-size: 20px;
-  color: gray;
-  outline: none;
+.start {
+  width: 1000px;
+  height: 600px;
+  font-size: 40px;
 }
 
-button:hover {
+.start:hover {
   cursor: pointer;
-  border: 3px solid black;
-  color: black;
 }
