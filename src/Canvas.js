@@ -3,8 +3,6 @@ import "./index.css";
 
 function Canvas() {
   const canvasRef = useRef();
-  // const canvas = canvasRef.current;
-  // const context = canvas.getContext("2d");
   let frameCount = 0;
   const canvasWidth = 1000;
   const canvasHeight = 600;
@@ -15,7 +13,7 @@ function Canvas() {
 
   const [planes, updatePlanes] = useState([
     {
-      x: Math.floor(Math.random() * (1000 + 1)),
+      x: Math.floor(Math.random() * (980 + 1)),
       y: 20,
       height: 15,
       width: 15,
@@ -28,7 +26,7 @@ function Canvas() {
     },
     {
       x: 980,
-      y: Math.floor(Math.random() * (600 + 1)),
+      y: Math.floor(Math.random() * (580 + 1)),
       height: 15,
       width: 15,
       dx: -1,
@@ -39,7 +37,7 @@ function Canvas() {
       selected: false,
     },
     {
-      x: Math.floor(Math.random() * (1000 + 1)),
+      x: Math.floor(Math.random() * (980 + 1)),
       y: 20,
       height: 15,
       width: 15,
@@ -52,7 +50,7 @@ function Canvas() {
     },
     {
       x: 980,
-      y: Math.floor(Math.random() * (600 + 1)),
+      y: Math.floor(Math.random() * (580 + 1)),
       height: 15,
       width: 15,
       dx: -1.25,
@@ -64,7 +62,7 @@ function Canvas() {
     },
     {
       x: 980,
-      y: Math.floor(Math.random() * (600 + 1)),
+      y: Math.floor(Math.random() * (580 + 1)),
       height: 15,
       width: 15,
       dx: -1.75,
@@ -75,7 +73,7 @@ function Canvas() {
       selected: false,
     },
     {
-      x: Math.floor(Math.random() * (1000 + 1)),
+      x: Math.floor(Math.random() * (980 + 1)),
       y: 580,
       height: 15,
       width: 15,
@@ -88,7 +86,7 @@ function Canvas() {
     },
     {
       x: 20,
-      y: Math.floor(Math.random() * (600 + 1)),
+      y: Math.floor(Math.random() * (580 + 1)),
       height: 15,
       width: 15,
       dx: 1.5,
@@ -101,7 +99,7 @@ function Canvas() {
 
     {
       x: 20,
-      y: Math.floor(Math.random() * (600 + 1)),
+      y: Math.floor(Math.random() * (580 + 1)),
       height: 15,
       width: 15,
       dx: 0.5,
@@ -167,6 +165,7 @@ function Canvas() {
         context.beginPath();
         context.rect(p.x, p.y, p.height, p.width, p.dx, p.dy);
         context.font = "16px Arial";
+        context.fillStyle = "#98DFEA";
         context.fillText(p.id, p.x + p.width / 4, p.y - 2);
         context.closePath();
         context.fill();
@@ -178,6 +177,7 @@ function Canvas() {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     context.font = "16px Arial";
+    context.fillStyle = "#98DFEA";
     context.fillText("Collisions: " + collisions, 8, 20);
     context.fillText("Score: " + score, 8, 40);
   };
@@ -226,7 +226,10 @@ function Canvas() {
     if (frameCount < 5000) {
       requestAnimationFrame(animate);
       frameCount++;
+    } else if (frameCount >= 5000) {
+      alert("Scenerio is over. Refresh the page to try another.");
     }
+
     for (var i = 0; i < planes.length; i++) {
       var p = planes[i];
       p.x += p.dx * Math.sin(p.angle);

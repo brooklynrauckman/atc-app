@@ -63,6 +63,7 @@ function Math() {
   );
   const [answer, setAnswer] = useState(null);
   const [score, updateScore] = useState(0);
+  const [incorrect, updateIncorrect] = useState(0);
 
   useEffect(() => {
     function downHandler(e) {
@@ -80,29 +81,47 @@ function Math() {
 
   useEffect(() => {
     for (let i = 0; i < myQuestions.length; i++) {
-      if (
-        i === currentSlide &&
-        answer === currentCorrect &&
-        currentSlide !== 7
-      ) {
-        setCurrentCorrect(myQuestions[i + 1].correctAnswer);
-        setCurrentQuestion(myQuestions[i + 1].question);
-        setCurrentChoices(myQuestions[i + 1].answers);
-        updateScore(score + 1);
-        setCurrentSlide(i + 1);
+      if (i === currentSlide && answer === currentCorrect) {
+        if (currentSlide === 7) {
+          setAnswer(null);
+          setCurrentQuestion("End of math problems");
+          setCurrentChoices([]);
+          updateScore(score + 1);
+          setCurrentSlide(null);
+        } else {
+          setAnswer(null);
+          setCurrentCorrect(myQuestions[i + 1].correctAnswer);
+          setCurrentQuestion(myQuestions[i + 1].question);
+          setCurrentChoices(myQuestions[i + 1].answers);
+          updateScore(score + 1);
+          setCurrentSlide(i + 1);
+        }
       }
-      if (answer === currentCorrect && currentSlide === 7) {
-        setCurrentQuestion("End of math problems");
-        setCurrentChoices([]);
-        updateScore(score + 1);
-        setCurrentSlide(null);
+      if (i === currentSlide && answer !== null && answer !== currentCorrect) {
+        if (currentSlide === 7) {
+          setAnswer(null);
+          setCurrentQuestion("End of math problems");
+          setCurrentChoices([]);
+          updateIncorrect(incorrect + 1);
+          setCurrentSlide(null);
+        } else {
+          setAnswer(null);
+          setCurrentCorrect(myQuestions[i + 1].correctAnswer);
+          setCurrentQuestion(myQuestions[i + 1].question);
+          setCurrentChoices(myQuestions[i + 1].answers);
+          updateIncorrect(incorrect + 1);
+          setCurrentSlide(i + 1);
+        }
       }
     }
-  }, [answer, currentCorrect, score, myQuestions, currentSlide]);
+  }, [currentCorrect, score, myQuestions, currentSlide]);
 
   return (
     <div className="Math">
-      <div className="score">Math Score: {score}</div>
+      <div className="score">
+        <p>Correct: {score}</p>
+        <p>Incorrect: {incorrect}</p>
+      </div>
       <div className="question-wrapper">
         <div className="question">{currentQuestion}</div>
         <div className="answers">

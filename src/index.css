@@ -4,9 +4,11 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  color: #25283d;
+  font-family: "Noto Sans SC", sans-serif;
 }
 canvas {
-  background-color: white;
+  background-color: #25283d;
   margin-bottom: 16px;
 }
 .toggle {
@@ -17,6 +19,8 @@ canvas {
   width: 1000px;
   height: 600px;
   font-size: 40px;
+  color: #efd9ce;
+  background-color: #25283d;
 }
 
 .start:hover {
