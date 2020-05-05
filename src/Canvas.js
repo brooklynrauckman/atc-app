@@ -10,7 +10,6 @@ function Canvas(props) {
   let collisions = 0;
 
   const { toggle, updateToggle, setQuestionDisplay } = props;
-  const [over, setOver] = useState(false);
 
   const [planes, updatePlanes] = useState([
     {
@@ -126,9 +125,6 @@ function Canvas(props) {
 
   useEffect(() => {
     function downHandler({ key }) {
-      if (key === "0") {
-        setOver(true);
-      }
       if (key === "1") {
         planes[0].selected = true;
         updatePlanes([...planes, ...[planes[0]]]);
@@ -172,12 +168,6 @@ function Canvas(props) {
       window.removeEventListener("keydown", downHandler);
     };
   }, [planes]);
-
-  useEffect(() => {
-    if (over === true) {
-      alert("Scenerio is over. Refresh the page to try another.");
-    }
-  }, [over]);
 
   //Collision Scenario Functions
 
@@ -288,10 +278,10 @@ function Canvas(props) {
         <h1>Air Traffic Collision Scenario Instructions: </h1>
         <p>
           Use the corresponding number key to move a "plane" as it is
-          approaching a collision. Simultaneously, attempt the mental math
-          problems below by pressing the corresponding arrow key. The scenario
-          will last for 90 seconds. If you would like to end the scenario before
-          the time runs out, press the 0 key. Click anywhere to begin.
+          approaching a collision. Simultaneously, attempt to correctly answer
+          the mental math problems by pressing the corresponding arrow key. You
+          have 9 seconds to answer each question before it disappears. The
+          scenario will last for 90 seconds. Click anywhere to begin.
         </p>
         <p style={{ color: "#07BEB8" }}>Good luck!</p>
       </button>
