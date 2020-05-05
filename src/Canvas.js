@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./index.css";
 
-function Canvas() {
+function Canvas(props) {
   const canvasRef = useRef();
   let frameCount = 0;
   const canvasWidth = 1000;
@@ -9,7 +9,8 @@ function Canvas() {
   let score = 0;
   let collisions = 0;
 
-  const [toggle, updateToggle] = useState(true);
+  const { toggle, updateToggle, setQuestionDisplay } = props;
+  const [over, setOver] = useState(false);
 
   const [planes, updatePlanes] = useState([
     {
@@ -17,34 +18,10 @@ function Canvas() {
       y: 20,
       height: 15,
       width: 15,
-      dx: 1,
-      dy: 1,
+      dx: 0.75,
+      dy: 0.75,
       angle: 1.22173,
       id: "1",
-      status: true,
-      selected: false,
-    },
-    {
-      x: 980,
-      y: Math.floor(Math.random() * (580 + 1)),
-      height: 15,
-      width: 15,
-      dx: -1,
-      dy: -1,
-      angle: 1.5708,
-      id: "2",
-      status: true,
-      selected: false,
-    },
-    {
-      x: Math.floor(Math.random() * (980 + 1)),
-      y: 20,
-      height: 15,
-      width: 15,
-      dx: 1.25,
-      dy: 1.25,
-      angle: 0.785398,
-      id: "3",
       status: true,
       selected: false,
     },
@@ -56,6 +33,30 @@ function Canvas() {
       dx: -1.25,
       dy: -1.25,
       angle: 1.5708,
+      id: "2",
+      status: true,
+      selected: false,
+    },
+    {
+      x: Math.floor(Math.random() * (980 + 1)),
+      y: 20,
+      height: 15,
+      width: 15,
+      dx: 1,
+      dy: 1,
+      angle: 1.5708,
+      id: "3",
+      status: true,
+      selected: false,
+    },
+    {
+      x: 980,
+      y: Math.floor(Math.random() * (580 + 1)),
+      height: 15,
+      width: 15,
+      dx: -1,
+      dy: -1,
+      angle: 1.5708,
       id: "4",
       status: true,
       selected: false,
@@ -65,8 +66,8 @@ function Canvas() {
       y: Math.floor(Math.random() * (580 + 1)),
       height: 15,
       width: 15,
-      dx: -1.75,
-      dy: -1.75,
+      dx: -1.25,
+      dy: -1.25,
       angle: 1.5708,
       id: "5",
       status: true,
@@ -77,8 +78,8 @@ function Canvas() {
       y: 580,
       height: 15,
       width: 15,
-      dx: -1.75,
-      dy: -1.75,
+      dx: -0.75,
+      dy: -0.75,
       angle: 1.0472,
       id: "6",
       status: true,
@@ -109,10 +110,25 @@ function Canvas() {
       status: true,
       selected: false,
     },
+    {
+      x: 980,
+      y: Math.floor(Math.random() * (580 + 1)),
+      height: 15,
+      width: 15,
+      dx: -1.75,
+      dy: -1.75,
+      angle: 1.5708,
+      id: "9",
+      status: true,
+      selected: false,
+    },
   ]);
 
   useEffect(() => {
     function downHandler({ key }) {
+      if (key === "0") {
+        setOver(true);
+      }
       if (key === "1") {
         planes[0].selected = true;
         updatePlanes([...planes, ...[planes[0]]]);
@@ -145,6 +161,10 @@ function Canvas() {
         planes[7].selected = true;
         updatePlanes([...planes, ...[planes[7]]]);
       }
+      if (key === "9") {
+        planes[8].selected = true;
+        updatePlanes([...planes, ...[planes[8]]]);
+      }
     }
     window.addEventListener("keydown", downHandler);
     // Remove event listeners on cleanup
@@ -152,6 +172,12 @@ function Canvas() {
       window.removeEventListener("keydown", downHandler);
     };
   }, [planes]);
+
+  useEffect(() => {
+    if (over === true) {
+      alert("Scenerio is over. Refresh the page to try another.");
+    }
+  }, [over]);
 
   //Collision Scenario Functions
 
@@ -178,8 +204,8 @@ function Canvas() {
     const context = canvas.getContext("2d");
     context.font = "16px Arial";
     context.fillStyle = "#98DFEA";
+    context.fillText("Saves: " + score, 8, 40);
     context.fillText("Collisions: " + collisions, 8, 20);
-    context.fillText("Score: " + score, 8, 40);
   };
 
   const collisionDetection = () => {
@@ -202,15 +228,15 @@ function Canvas() {
                 collisions++;
               }
               if (p.selected === true) {
-                p.x = 300;
-                p.y = 20;
+                p.x = 20;
+                p.y = Math.floor(Math.random() * (580 + 1));
                 score++;
                 c.selected = false;
                 p.selected = false;
               }
               if (c.selected === true) {
-                c.x = 300;
-                c.y = 20;
+                c.x = 20;
+                c.y = Math.floor(Math.random() * (580 + 1));
                 score++;
                 c.selected = false;
                 p.selected = false;
@@ -223,11 +249,12 @@ function Canvas() {
   };
 
   const animate = () => {
-    if (frameCount < 5000) {
+    if (frameCount < 5400) {
       requestAnimationFrame(animate);
       frameCount++;
-    } else if (frameCount >= 5000) {
+    } else {
       alert("Scenerio is over. Refresh the page to try another.");
+      setQuestionDisplay(false);
     }
 
     for (var i = 0; i < planes.length; i++) {
@@ -258,7 +285,15 @@ function Canvas() {
           updateToggle(false);
         }}
       >
-        Start
+        <h1>Air Traffic Collision Scenario Instructions: </h1>
+        <p>
+          Use the corresponding number key to move a "plane" as it is
+          approaching a collision. Simultaneously, attempt the mental math
+          problems below by pressing the corresponding arrow key. The scenario
+          will last for 90 seconds. If you would like to end the scenario before
+          the time runs out, press the 0 key. Click anywhere to begin.
+        </p>
+        <p style={{ color: "#07BEB8" }}>Good luck!</p>
       </button>
       <canvas
         ref={canvasRef}

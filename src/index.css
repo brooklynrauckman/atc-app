@@ -18,7 +18,8 @@ canvas {
 .start {
   width: 1000px;
   height: 600px;
-  font-size: 40px;
+  padding: 64px;
+  font-size: 24px;
   color: #efd9ce;
   background-color: #25283d;
 }
