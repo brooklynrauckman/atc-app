@@ -40,6 +40,13 @@ function Nav() {
           >
             Differences
           </Link>
+          <Link
+            to="/equations"
+            className="link"
+            onClick={() => updateNavToggle(!navToggle)}
+          >
+            Equations
+          </Link>
         </div>
       </div>
     </div>

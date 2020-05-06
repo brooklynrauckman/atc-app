@@ -125,35 +125,35 @@ function Differences() {
   return (
     <div className="differences">
       {start === false ? (
-        <div className="instructions">
-          <h1>Differences Memory Challenge Instructions:</h1>
-          <p>
-            Cards will appear for 2 seconds each. The first two cards will be a
-            number 1-9. The next card with be an empty box. Before the card
-            switches, press the number key that corresponds to the difference
-            between the first two numbers. The next card will be a number 1-9,
-            followed by another card with an empty box. You will need to press
-            the number key that corresponds to the difference between the last
-            two numbers given (NOT the previous difference). For example, if the
-            first two cards are '4' then '6', the first difference will be '2'.
-            Then, if the card is '9', the difference would be '3'. This pattern
-            will continue through 5 differnences.
-          </p>
-          <p className="good-luck-diff">Good Luck!</p>
-        </div>
+        <React.Fragment>
+          <div className="instructions">
+            <h1>Differences Memory Challenge Instructions:</h1>
+            <p>
+              Cards will appear for 2 seconds each. The first two cards will be
+              a number 1-9. The next card with be an empty box. Before the card
+              switches, press the number key that corresponds to the difference
+              between the first two numbers. The next card will be a number 1-9,
+              followed by another card with an empty box. You will need to press
+              the number key that corresponds to the difference between the last
+              two numbers given (NOT the previous difference). For example, if
+              the first two cards are '4' then '6', the first difference will be
+              '2'. Then, if the card is '9', the difference would be '3'. This
+              pattern will continue through 5 differences.
+            </p>
+            <p className="good-luck-diff">Good Luck!</p>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                setStart(true);
+                updateActiveSlide(0);
+              }}
+            >
+              Start
+            </button>
+          </div>
+        </React.Fragment>
       ) : null}
-      <div>
-        {start === false ? (
-          <button
-            onClick={() => {
-              setStart(true);
-              updateActiveSlide(0);
-            }}
-          >
-            Start
-          </button>
-        ) : null}
-      </div>
       <div>
         {start && activeSlide < memorySet.length ? (
           <div className="scene">
