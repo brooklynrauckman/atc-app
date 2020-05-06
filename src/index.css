@@ -1,29 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  color: #25283d;
+  color: #340068;
   font-family: "Noto Sans SC", sans-serif;
-}
-canvas {
-  background-color: #25283d;
-  margin-bottom: 16px;
-}
-.toggle {
-  display: none;
-}
-
-.start {
-  width: 1000px;
-  height: 600px;
-  padding: 64px;
-  font-size: 24px;
-  color: #efd9ce;
-  background-color: #25283d;
-}
-
-.start:hover {
-  cursor: pointer;
 }

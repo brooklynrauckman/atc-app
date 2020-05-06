@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import "./App.css";
-import Canvas from "./Canvas.js";
-import Math from "./Math.js";
+import Collision from "./Collision.js";
+import Differences from "./Differences.js";
+import Nav from "./Nav.js";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [toggle, updateToggle] = useState(true);
   const [questionDisplay, setQuestionDisplay] = useState(true);
 
   return (
-    <div className="App">
-      <Canvas
-        toggle={toggle}
-        updateToggle={updateToggle}
-        setQuestionDisplay={setQuestionDisplay}
-      />
-      <Math
-        toggle={toggle}
-        questionDisplay={questionDisplay}
-        setQuestionDisplay={setQuestionDisplay}
-      />
-    </div>
+    <Router>
+      {toggle ? <Nav /> : null}
+      <Switch>
+        <Route path="/differences">
+          <Differences />
+        </Route>
+        <Route path="/">
+          <Collision
+            toggle={toggle}
+            questionDisplay={questionDisplay}
+            updateToggle={updateToggle}
+            setQuestionDisplay={setQuestionDisplay}
+          />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

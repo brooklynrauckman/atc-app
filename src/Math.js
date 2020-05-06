@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import "./Math.css";
 
 function Math(props) {
   const { toggle, questionDisplay, setQuestionDisplay } = props;
@@ -150,7 +150,6 @@ function Math(props) {
     setAnswered(true);
     setAnswer(null);
     setQuestionDisplay(false);
-    console.log("correct");
   };
   const inCorrectPress = () => {
     clearTimeout(timer);

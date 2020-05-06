@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./index.css";
+import "./Canvas.css";
 
 function Canvas(props) {
   const canvasRef = useRef();
@@ -181,7 +181,7 @@ function Canvas(props) {
         context.beginPath();
         context.rect(p.x, p.y, p.height, p.width, p.dx, p.dy);
         context.font = "16px Arial";
-        context.fillStyle = "#98DFEA";
+        context.fillStyle = "#F6F930";
         context.fillText(p.id, p.x + p.width / 4, p.y - 2);
         context.closePath();
         context.fill();
@@ -193,7 +193,7 @@ function Canvas(props) {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     context.font = "16px Arial";
-    context.fillStyle = "#98DFEA";
+    context.fillStyle = "#FCFCFC";
     context.fillText("Saves: " + score, 8, 40);
     context.fillText("Collisions: " + collisions, 8, 20);
   };
@@ -283,7 +283,7 @@ function Canvas(props) {
           have 9 seconds to answer each question before it disappears. The
           scenario will last for 90 seconds. Click anywhere to begin.
         </p>
-        <p style={{ color: "#07BEB8" }}>Good luck!</p>
+        <p className="good-luck">Good luck!</p>
       </button>
       <canvas
         ref={canvasRef}

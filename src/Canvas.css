@@ -1,0 +1,26 @@
+canvas {
+  background-color: #000000;
+  margin-bottom: 16px;
+}
+.toggle {
+  display: none;
+}
+
+.start {
+  width: 1000px;
+  height: 600px;
+  padding: 64px;
+  font-size: 24px;
+  color: #fcfcfc;
+  background-color: #000000;
+  box-shadow: 1px 1px 10px rgba(52, 0, 104, 0.3);
+}
+
+.start:hover {
+  cursor: pointer;
+}
+
+.good-luck {
+  color: #f6f930;
+  font-size: 32px;
+}
