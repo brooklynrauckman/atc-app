@@ -3,6 +3,7 @@ import Collision from "./Collision.js";
 import Differences from "./Differences.js";
 import Memory from "./Memory.js";
 import Nav from "./Nav.js";
+import Perspective from "./Perspective.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
     <Router>
       {toggle ? <Nav /> : null}
       <Switch>
+        <Route path="/perspective">
+          <Perspective />
+        </Route>
         <Route path="/equations">
           <Memory />
         </Route>

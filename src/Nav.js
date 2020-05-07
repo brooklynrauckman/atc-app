@@ -47,6 +47,13 @@ function Nav() {
           >
             Equations
           </Link>
+          <Link
+            to="/perspective"
+            className="link"
+            onClick={() => updateNavToggle(!navToggle)}
+          >
+            Perspective
+          </Link>
         </div>
       </div>
     </div>
