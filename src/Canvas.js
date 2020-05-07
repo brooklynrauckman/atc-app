@@ -239,7 +239,7 @@ function Canvas(props) {
   };
   let myReq;
   const animate = () => {
-    if (frameCount < 400) {
+    if (frameCount < 5400) {
       myReq = requestAnimationFrame(animate);
       frameCount++;
     } else {
