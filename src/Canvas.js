@@ -237,14 +237,15 @@ function Canvas(props) {
       }
     }
   };
-
+  let myReq;
   const animate = () => {
-    if (frameCount < 5400) {
-      requestAnimationFrame(animate);
+    if (frameCount < 400) {
+      myReq = requestAnimationFrame(animate);
       frameCount++;
     } else {
-      alert("Scenerio is over. Refresh the page to try another.");
-      setQuestionDisplay(false);
+      window.cancelAnimationFrame(myReq);
+      alert("Scenerio is over. Try again or try another challenge!");
+      window.location.reload();
     }
 
     for (var i = 0; i < planes.length; i++) {
@@ -269,7 +270,7 @@ function Canvas(props) {
   return (
     <div>
       <button
-        className={toggle === true ? "start" : "toggle"}
+        className={toggle ? "start" : "toggle"}
         onClick={() => {
           requestAnimationFrame(animate);
           updateToggle(false);
