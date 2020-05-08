@@ -1,55 +1,107 @@
 import React, { useState, useEffect } from "react";
-import "./Math.css";
+import "./Maths.css";
 
-function Math(props) {
+const singleDigit = Math.floor(Math.random() * 9 + 1);
+const doubleDigit = Math.floor(Math.random() * 90 + 10);
+const tripleDigit =
+  Math.round(Math.floor(Math.random() * 900 + 100) / singleDigit) * singleDigit;
+const doubleDigit1 = Math.floor(Math.random() * 90 + 10);
+const tripleDigit1 = Math.floor(Math.random() * 500 + 400);
+const doubleDigit2 = Math.floor(Math.random() * 90 + 10);
+const tripleDigit2 = Math.floor(Math.random() * 400 + 100);
+const doubleDigit3 = Math.floor(Math.random() * 90 + 10);
+const tripleDigit3 = Math.floor(Math.random() * 900 + 100);
+const doubleDigit4 = Math.floor(Math.random() * 90 + 10);
+const tripleDigit4 = Math.floor(Math.random() * 900 + 100);
+const doubleDigit5 = Math.floor(Math.random() * 90 + 10);
+const tripleDigit5 = Math.floor(Math.random() * 900 + 100);
+const doubleDigit6 = Math.floor(Math.random() * 90 + 10);
+const tripleDigit6 =
+  Math.round(Math.floor(Math.random() * 900 + 100) / doubleDigit3) *
+  doubleDigit3;
+const doubleDigit7 = Math.floor(Math.random() * 60 + 10);
+const tripleDigit7 = Math.floor(Math.random() * 600 + 100);
+const doubleDigit8 = Math.floor(Math.random() * 60 + 10);
+const tripleDigit8 = Math.floor(Math.random() * 600 + 100);
+const doubleDigit9 = Math.floor(Math.random() * 20 + 10);
+const tripleDigit9 = Math.floor(Math.random() * 600 + 100);
+const doubleDigit10 = Math.floor(Math.random() * 20 + 10);
+const tripleDigit10 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit11 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit12 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit13 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit14 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit15 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit16 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit17 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit18 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit19 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit20 = Math.floor(Math.random() * 500 + 400);
+const tripleDigit21 = Math.floor(Math.random() * 400 + 100);
+const tripleDigit22 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit23 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit24 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit25 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit26 = Math.floor(Math.random() * 600 + 100);
+const tripleDigit27 = Math.floor(Math.random() * 600 + 100);
+const correct = tripleDigit / singleDigit;
+const correct1 = tripleDigit1 - tripleDigit2;
+const correct2 = tripleDigit6 / doubleDigit3;
+const correct3 = doubleDigit7 * doubleDigit8;
+const correct4 = tripleDigit10 + tripleDigit11;
+const correct5 = tripleDigit15 + tripleDigit16;
+const correct6 = tripleDigit20 - tripleDigit21;
+const correct7 = doubleDigit9 * doubleDigit10;
+
+function Maths(props) {
   const { toggle, questionDisplay, setQuestionDisplay } = props;
 
   var myQuestions = [
     {
-      question: "150 / 5 =",
-      answers: [15, 20, 30, 25],
+      question: `${tripleDigit} / ${singleDigit} =`,
+      answers: [doubleDigit, doubleDigit1, correct, doubleDigit2],
       correctAnswer: 2,
       id: 0,
     },
     {
-      question: "379 - 214 =",
-      answers: [115, 225, 173, 165],
+      question: `${tripleDigit1} - ${tripleDigit2} =`,
+      answers: [tripleDigit3, tripleDigit4, tripleDigit5, correct1],
       correctAnswer: 3,
       id: 1,
     },
     {
-      question: "320 / 20 =",
-      answers: [16, 20, 24, 12],
+      question: `${tripleDigit6} / ${doubleDigit3} =`,
+      answers: [correct2, doubleDigit4, doubleDigit5, doubleDigit6],
       correctAnswer: 0,
       id: 2,
     },
     {
-      question: "45 * 12 =",
-      answers: [452, 420, 610, 540],
+      question: `${doubleDigit7} * ${doubleDigit8} =`,
+      answers: [tripleDigit7, tripleDigit8, tripleDigit9, correct3],
       correctAnswer: 3,
       id: 3,
     },
     {
-      question: "279 + 352 =",
-      answers: [631, 543, 581, 697],
+      question: `${tripleDigit10} + ${tripleDigit11} =`,
+      answers: [correct4, tripleDigit12, tripleDigit13, tripleDigit14],
       correctAnswer: 0,
       id: 4,
     },
     {
-      question: "731 + 219 =",
-      answers: [512, 950, 1040, 912],
+      question: `${tripleDigit15} + ${tripleDigit16} =`,
+      answers: [tripleDigit17, correct5, tripleDigit18, tripleDigit19],
       correctAnswer: 1,
       id: 5,
     },
     {
-      question: "416 - 105 =",
-      answers: [311, 281, 391, 209],
+      question: `${tripleDigit20} - ${tripleDigit21} =`,
+      answers: [correct6, tripleDigit22, tripleDigit23, tripleDigit24],
       correctAnswer: 0,
       id: 6,
     },
     {
-      question: "28 * 32 =",
-      answers: [646, 896, 912, 986],
+      question: `${doubleDigit9} * ${doubleDigit10} =`,
+      answers: [tripleDigit25, correct7, tripleDigit26, tripleDigit27],
       correctAnswer: 1,
       id: 7,
     },
@@ -222,4 +274,4 @@ function Math(props) {
   );
 }
 
-export default Math;
+export default Maths;

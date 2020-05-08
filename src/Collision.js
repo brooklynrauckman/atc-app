@@ -1,6 +1,6 @@
 import React from "react";
 import Canvas from "./Canvas.js";
-import Math from "./Math.js";
+import Maths from "./Maths.js";
 import "./Collision.css";
 
 function Collision(props) {
@@ -12,7 +12,7 @@ function Collision(props) {
         updateToggle={updateToggle}
         setQuestionDisplay={setQuestionDisplay}
       />
-      <Math
+      <Maths
         toggle={toggle}
         questionDisplay={questionDisplay}
         setQuestionDisplay={setQuestionDisplay}
