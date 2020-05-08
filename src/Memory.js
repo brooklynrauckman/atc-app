@@ -217,7 +217,7 @@ const Memory = () => {
     if (activeSlide === 1 && answered === 2) {
       if (currentLevel === 1) {
         if (answer === c) correctPressC();
-        if (answer !== null && answer !== b) inCorrectPressC();
+        if (answer !== null && answer !== c) inCorrectPressC();
       }
       if (currentLevel === 2) {
         if (answer === c3) correctPressC();
