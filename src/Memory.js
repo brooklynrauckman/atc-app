@@ -366,7 +366,7 @@ const Memory = () => {
       <div></div>
       <div>
         {start && activeSlide < equationSet.length ? (
-          <div className="scene">
+          <div className="scene-eq">
             <div className={flip ? "card-eq" : "flip-card-eq"}>
               <div className={flip ? "card-inner-eq" : "flip-card-inner-eq"}>
                 {activeSlide % 2 === 0 ? (

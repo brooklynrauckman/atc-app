@@ -156,9 +156,11 @@ function Differences() {
       ) : null}
       <div>
         {start && activeSlide < memorySet.length ? (
-          <div className="scene">
-            <div className={flip ? "card" : "flip-card"}>
-              <div className={flip ? "card-inner" : "flip-card-inner"}>
+          <div className="scene-diff">
+            <div className={flip ? "card-diff" : "flip-card-diff"}>
+              <div
+                className={flip ? "card-inner-diff" : "flip-card-inner-diff"}
+              >
                 {activeSlide % 2 === 0 && activeSlide > 0 ? (
                   <input type="text" id="myText" autoFocus />
                 ) : (

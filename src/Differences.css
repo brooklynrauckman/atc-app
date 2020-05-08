@@ -23,14 +23,14 @@ button:hover {
   cursor: pointer;
 }
 
-.scene {
+.scene-diff {
   width: 50vw;
   min-width: 300px;
   height: 400px;
   perspective: 1000px;
 }
 
-.card {
+.card-diff {
   width: 100%;
   height: 100%;
   transition: transform 0.2s linear;
@@ -44,7 +44,7 @@ button:hover {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-.flip-card {
+.flip-card-diff {
   width: 100%;
   height: 100%;
   transform: rotateY(180deg);
@@ -59,13 +59,13 @@ button:hover {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-.flip-card-inner {
+.flip-card-inner-diff {
   font-size: 6rem;
   color: #2f2f2f;
   transform: rotateY(180deg);
 }
 
-.card-inner {
+.card-inner-diff {
   font-size: 6rem;
   color: #2f2f2f;
 }
