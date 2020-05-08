@@ -30,6 +30,13 @@ function Nav() {
             className="link"
             onClick={() => updateNavToggle(!navToggle)}
           >
+            Home
+          </Link>
+          <Link
+            to="/collision"
+            className="link"
+            onClick={() => updateNavToggle(!navToggle)}
+          >
             Collision Scenario
           </Link>
 

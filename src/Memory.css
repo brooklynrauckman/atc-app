@@ -135,3 +135,11 @@ button:hover {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+@media (max-width: 650px) {
+  .levels {
+    flex-direction: column;
+
+    width: calc(100% - 4rem);
+  }
+}

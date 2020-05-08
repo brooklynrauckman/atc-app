@@ -67,6 +67,8 @@ function Math(props) {
   const [score, updateScore] = useState(0);
   const [incorrect, updateIncorrect] = useState(0);
   const [answered, setAnswered] = useState(false);
+  const [flip, setFlip] = useState(false);
+
   let timer = null;
 
   useEffect(() => {
@@ -130,6 +132,7 @@ function Math(props) {
         setCurrentChoices(myQuestions[i + 1].answers);
         setCurrentSlide(i + 1);
         setQuestionDisplay(true);
+        setFlip(!flip);
       }
     }
   };
@@ -168,26 +171,48 @@ function Math(props) {
             <p>Incorrect: {incorrect}</p>
           </div>
           {questionDisplay === true ? (
-            <div className="question-wrapper">
-              <div className="question">{currentQuestion}</div>
-              <div className="answers">
-                {currentChoices.map((c, index) => (
-                  <div className="choice" key={index}>
-                    {c}
-                    <div className="arrow">
-                      {index === 0 ? (
-                        <img src="./triangle.svg" alt="" className="left" />
-                      ) : null}
-                      {index === 1 ? <img src="./triangle.svg" alt="" /> : null}
-                      {index === 2 ? (
-                        <img src="./triangle.svg" alt="" className="right" />
-                      ) : null}
-                      {index === 3 ? (
-                        <img src="./triangle.svg" alt="" className="down" />
-                      ) : null}
+            <div className="scene-math">
+              <div className={flip ? "card-math" : "flip-card-math"}>
+                <div
+                  className={flip ? "card-inner-math" : "flip-card-inner-math"}
+                >
+                  <div className="question-wrapper">
+                    <div className="question">{currentQuestion}</div>
+                    <div className="answers">
+                      {currentChoices.map((c, index) => (
+                        <div className="choice" key={index}>
+                          {c}
+                          <div className="arrow">
+                            {index === 0 ? (
+                              <img
+                                src="./triangle.svg"
+                                alt=""
+                                className="left"
+                              />
+                            ) : null}
+                            {index === 1 ? (
+                              <img src="./triangle.svg" alt="" />
+                            ) : null}
+                            {index === 2 ? (
+                              <img
+                                src="./triangle.svg"
+                                alt=""
+                                className="right"
+                              />
+                            ) : null}
+                            {index === 3 ? (
+                              <img
+                                src="./triangle.svg"
+                                alt=""
+                                className="down"
+                              />
+                            ) : null}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           ) : null}

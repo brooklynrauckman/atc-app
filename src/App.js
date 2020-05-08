@@ -4,6 +4,7 @@ import Differences from "./Differences.js";
 import Memory from "./Memory.js";
 import Nav from "./Nav.js";
 import Perspective from "./Perspective.js";
+import Home from "./Home.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -14,22 +15,25 @@ function App() {
     <Router>
       {toggle ? <Nav /> : null}
       <Switch>
-        <Route path="/perspective">
-          <Perspective />
+        <Route exact path="/">
+          <Home />
         </Route>
-        <Route path="/equations">
-          <Memory />
-        </Route>
-        <Route path="/differences">
-          <Differences />
-        </Route>
-        <Route path="/">
+        <Route exact path="/collision">
           <Collision
             toggle={toggle}
             questionDisplay={questionDisplay}
             updateToggle={updateToggle}
             setQuestionDisplay={setQuestionDisplay}
           />
+        </Route>
+        <Route exact path="/differences">
+          <Differences />
+        </Route>
+        <Route exact path="/equations">
+          <Memory />
+        </Route>
+        <Route exact path="/perspective">
+          <Perspective />
         </Route>
       </Switch>
     </Router>

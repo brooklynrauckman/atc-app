@@ -1,14 +1,13 @@
 .nav-logo {
-  z-index: 1;
   transform: scale(1);
   transition: 0.2s ease-in-out;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   height: 32px;
   width: 32px;
   z-index: +1;
-  padding: 12px 1rem;
+  padding: 30px 2rem;
 }
 
 .nav-logo:hover {
@@ -28,7 +27,7 @@
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   transform: translateX(0);
   transition: 0.2s ease-in-out;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .nav-wrapper {
@@ -46,11 +45,30 @@
   justify-content: space-around;
   align-items: center;
   position: relative;
-  padding-left: 2rem;
+  padding-left: 2.5rem;
 }
 
 .link {
-  padding-left: 2rem;
+  transform: scale(1);
+  transition: 0.2s ease-in-out;
+  padding-left: 2.5rem;
   text-decoration: none;
   color: #fcfcfc;
+}
+
+.link:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 800px) {
+  .link-wrapper {
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 0;
+  }
+  .link {
+    width: 100%;
+    text-align: center;
+    padding-left: 0;
+  }
 }

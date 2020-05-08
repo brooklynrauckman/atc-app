@@ -268,24 +268,29 @@ function Canvas(props) {
   };
 
   return (
-    <div>
-      <button
-        className={toggle ? "start" : "toggle"}
-        onClick={() => {
-          requestAnimationFrame(animate);
-          updateToggle(false);
-        }}
-      >
-        <h1>Air Traffic Collision Scenario Instructions: </h1>
+    <div className="canvas-wrapper">
+      <div className={toggle ? "start" : "toggle"}>
+        <h1>Collision Scenario Instructions: </h1>
         <p>
           Use the corresponding number key to move a "plane" as it is
           approaching a collision. Simultaneously, attempt to correctly answer
           the mental math problems by pressing the corresponding arrow key. You
           have 9 seconds to answer each question before it disappears. The
-          scenario will last for 90 seconds. Click anywhere to begin.
+          scenario will last for 90 seconds.
         </p>
         <p className="good-luck">Good luck!</p>
-      </button>
+      </div>
+      <div>
+        <button
+          className={toggle ? "" : "toggle"}
+          onClick={() => {
+            requestAnimationFrame(animate);
+            updateToggle(false);
+          }}
+        >
+          Start
+        </button>
+      </div>
       <canvas
         ref={canvasRef}
         width="1000"
