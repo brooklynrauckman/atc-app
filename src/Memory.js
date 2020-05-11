@@ -18,7 +18,7 @@ const extra4 = Math.floor(Math.random() * (3 + 1)) + 1;
 const extra5 = Math.floor(Math.random() * (3 + 1)) + 1;
 const extra6 = Math.floor(Math.random() * (2 + 1)) + 1;
 const extra7 = Math.floor(Math.random() * (2 + 1)) + 1;
-const extra8 = Math.floor(Math.random() * (3 + 1)) + 3;
+const extra8 = Math.floor(Math.random() * (2 + 1)) + 3;
 const c3 = Math.floor(Math.random() * (4 + 1)) + 4;
 const b3 = c3 - extra;
 const a3 = Math.floor(Math.random() * (3 + 1)) + 1;
@@ -34,7 +34,7 @@ const c6 = extra3 + b6;
 const c7 = Math.floor(Math.random() * (2 + 1)) + 1;
 const b7 = c7 * extra6;
 const a7 = extra5 + b7;
-const c8 = Math.floor(Math.random() * (1 + 1)) + 1;
+const c8 = Math.floor(Math.random() * (2 + 1)) + 1;
 const a8 = extra8 - c8;
 const b8 = extra7 * a8;
 
